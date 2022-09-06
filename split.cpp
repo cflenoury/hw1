@@ -16,8 +16,29 @@ the function below should be the only one in this file.
 
 void split(Node*& in, Node*& odds, Node*& evens)
 {
-  /* Add code here */
-// WRITE YOUR CODE HERE
+  if(in == NULL){//Determine if you are at the end of the list
+    return;
+  }else{
+    if(in->value %2 == 0){//Even case
+      if(evens == NULL){//Check if evens list is empty
+        evens = in;//Make evens point at the node in list with the even value
+      }else{//If the evens list has already been started
+        evens->next = in;//Add element to the end of evens list
+        //(odds and evens should always be the last node in the list)
+      }
+    }else{//Odd case
+      if(odds == NULL){//Check if odds list is empty
+        odds = in;//Make odds point at the node in list with the odd value
+      }else{//If the evens list has already been started
+        odds->next = in;//Add element to the end of evens list
+        //(odds and evens should always be the last node in the list)
+      }
+    }
+    //Call function on next item in original list (which should be in either 
+    //evens or odds)
+    split(in-next, odds, evens);
+    in = NULL;
+  }
 
 }
 
