@@ -2,6 +2,8 @@
 #include <iostream>
 using namespace std;
 
+void deleteLists(Node* in);
+
 int main(int argc, char* argv[])
 {
     //Create head pointer
@@ -29,9 +31,19 @@ int main(int argc, char* argv[])
   printLists(odds);
 
   cout << "evens:";
-  printLists(evens);  
+  printLists(evens);
+
+  deleteLists(evens);
+  deleteLists(odds);  
 
   return 0;
 }
 
+void deleteLists(Node* in){
+  while(in != nullptr){
+    Node* temp = in->next;
+    delete in;
+    in = temp;
+  }
+}
 
