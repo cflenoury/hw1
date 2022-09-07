@@ -2,26 +2,28 @@
 #include <iostream>
 using namespace std;
 
-void printLists(Node* list);
-
 int main(int argc, char* argv[])
 {
     //Create head pointer
   Node* initial = new Node(1, nullptr);
-  initial->next = new Node(2, nullptr);
-  initial->next->next = new Node(3, nullptr);
-  initial->next->next->next = new Node(4, nullptr);
-  initial->next->next->next->next = new Node(5, nullptr);
+  Node* init_head = initial;
+  int i = 2;
+  while(i<=100){
+    initial->next = new Node(i, nullptr);
+    initial = initial->next;
+    i+=3;
+  }
 
   Node* evens = nullptr;
   Node* odds = nullptr;
 
-  cout << "initial list: ";
-  printLists(initial);
+  cout << "initial list ( initial :-) ): ";
+  printLists(init_head);
 
-  split(initial, odds, evens);
+  split(init_head, odds, evens);  
 
-  
+  cout << "initial list ( final ): ";
+  printLists(init_head);
 
   cout << "odds:";
   printLists(odds);
@@ -29,14 +31,7 @@ int main(int argc, char* argv[])
   cout << "evens:";
   printLists(evens);  
 
-cout<< "Odds->next: " << odds->next->value;
   return 0;
 }
 
-void printLists(Node* list){
-    if(list == nullptr){
-        return;
-    }
-    cout << list->value << " ";
-    printLists(list->next);
-}
+
