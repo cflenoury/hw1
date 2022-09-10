@@ -111,9 +111,6 @@ void ULListStr::clear()
     Item *temp = head_->next;
     delete head_;
     head_ = temp;
-    if(head_ == tail_){
-      std::cout << ""
-    }
   }
   tail_ = NULL;
   size_ = 0;
