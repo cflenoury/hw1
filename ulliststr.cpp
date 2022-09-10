@@ -111,6 +111,9 @@ void ULListStr::clear()
     Item *temp = head_->next;
     delete head_;
     head_ = temp;
+    if(head_ == tail_){
+      std::cout << ""
+    }
   }
   tail_ = NULL;
   size_ = 0;
@@ -144,15 +147,14 @@ std::string* ULListStr::getValAtLoc(size_t loc) const{
   }
 }
 
-void ULListStr::pop_back(){
-  
+void ULListStr::pop_back(){  
   if(size_== 0){//If there is nothing in the list, return an error
     throw std::invalid_argument("List is empty");
   }else{//Delete the last item in the list (which would be in the tail)
     if(tail_->last == 1){//Only one item is in the tail (@ index 0)
-      Item* temp = tail_;//Create a temp Item* to reference the current tail
-      tail_ = tail_->prev;//Make the previous item the new tail
-      delete temp;//Delete original tail Item
+      Item* temp = tail_->prev;//Create a temp Item* to reference the current tail
+      delete tail_;//Delete original tail Item
+      tail_ = temp;//Make the previous item the new tail
     }else{//Multiple items are in the tail
       //Go to the tail_'s array and replace the last element with an empty string
       tail_->val[tail_->last-1] = "\0";
@@ -167,9 +169,9 @@ void ULListStr::pop_front(){
     throw std::invalid_argument("List is empty");
   }else{//Delete the first item in the head
     if(head_->first == ARRSIZE-1){//There is only 1 item in the head
-      Item* temp = head_;
-      head_ = head_->next;
-      delete temp;
+      Item* temp = head_->next;
+      delete head_;
+      head_ = temp;
     }else{//If there are multiple items in head_
       head_->val[head_->first] = "\0";
       head_->first++;
